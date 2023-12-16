@@ -1,7 +1,7 @@
 Installation
 =====
 
-Installation2
+Installation1
 ------------
 
 To use Lumache, first install it using pip:
@@ -10,7 +10,7 @@ To use Lumache, first install it using pip:
 
    (.venv) $ pip install lumache
 
-Creating recipes2
+Creating recipes1
 ----------------
 
 To retrieve a list of random ingredients,
