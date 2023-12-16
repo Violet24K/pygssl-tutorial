@@ -24,6 +24,6 @@ how to :ref:`installation` the project.
    :maxdepth: 1
    :caption: 💡 Get Started
 
-   get_started/introductions
    get_started/tutorial
    get_started/what
+   get_started/colab
