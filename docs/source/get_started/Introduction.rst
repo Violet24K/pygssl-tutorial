@@ -1,7 +1,5 @@
-introduction
+Introduction
 =====
-
-.. _installation:
 
 Installation
 ------------

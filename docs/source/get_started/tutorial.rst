@@ -1,8 +1,6 @@
 Tutorial
 =====
 
-.. _installation:
-
 Installation
 ------------
 
