@@ -1,4 +1,4 @@
-Welcome to Lumache's documentation!
+GraphSSL documentation
 ===================================
 
 **Lumache** (/lu'make/) is a Python library for cooks and food lovers
@@ -17,6 +17,13 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 1
+   :caption: install
 
-   usage
-   api
+   install/installation
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Get Started
+
+   get_started/introduction
