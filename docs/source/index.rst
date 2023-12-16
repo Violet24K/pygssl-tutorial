@@ -1,13 +1,25 @@
 GraphSSL documentation
 ===================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+**GraphSSL** is a Python library built upon `PyTorch <https://pytorch.org>`_.
+It integrates state-of-the-art algorithms for Self-Supervised Learning on Graphs and offers simple APIs to 
+call the algorithms from a variety of high-quality research papers. GraphSSL can be helpful for many downstream tasks, depending on the dataset
+properties, as it contains many self-supervised algorithms for different kinds of graphs:
 
-Check out the section for further information, including
-how to :ref:`installation` the project.
+   **General Algorithms**
+
+   **Heterogeneous/Multiplex/Multiview Algorithms**
+
+   **Algorithms for Temporal/Dynamic Graphs**
+
+   **Algorithms for Directed Graphs**
+
+   **Algorithms for Signed Graphs**
+
+   **Algorithms for Molecular Graphs**
+
+.. Check out the section for further information, including
+.. how to :ref:`installation` the project.
 
 .. note::
 
@@ -25,5 +37,4 @@ how to :ref:`installation` the project.
    :caption: 💡 Get Started
 
    get_started/tutorial
-   get_started/what
-   get_started/colab
+   get_started/toadd
