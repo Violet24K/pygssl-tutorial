@@ -6,7 +6,7 @@ It integrates state-of-the-art algorithms for Self-Supervised Learning on Graphs
 call the algorithms from a variety of high-quality research papers. GraphSSL can be helpful for many downstream tasks, depending on the dataset
 properties, as it contains many self-supervised algorithms for different kinds of graphs:
 
-   **General Regular Graphs**
+   **General/Regular Graphs**
 
    **Heterogeneous/Multiplex/Multiview Graphs**
 
