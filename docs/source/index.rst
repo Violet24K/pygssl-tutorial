@@ -26,3 +26,4 @@ how to :ref:`installation` the project.
 
    get_started/introductions
    get_started/tutorial
+   get_started/what
