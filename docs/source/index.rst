@@ -16,13 +16,13 @@ how to :ref:`installation` the project.
 
 .. toctree::
    :maxdepth: 1
-   :caption: install
+   :caption: 🚀 install
 
    install/installation
 
 .. toctree::
    :maxdepth: 1
-   :caption: Get Started
+   :caption: 💡 Get Started
 
-   get_started/introduction
+   get_started/introductions
    get_started/tutorial
