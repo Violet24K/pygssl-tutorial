@@ -32,3 +32,22 @@ properties, as it contains many self-supervised algorithms for different kinds o
 
    get_started/tutorial
    get_started/toadd
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Tutorial
+
+   tutorials/general.rst
+   tutorials/non-contrastive.rst
+   tutorials/heterogeneous.rst
+
+
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: 📚 Reference
+
+   reference/trainer.rst
+   reference/loader.rst
