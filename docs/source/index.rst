@@ -36,7 +36,7 @@ properties, as it contains many self-supervised algorithms for different kinds o
 
 .. toctree::
    :maxdepth: 2
-   :caption: Tutorial
+   :caption: 🪄 Tutorial
 
    tutorials/general.rst
    tutorials/non-contrastive.rst
