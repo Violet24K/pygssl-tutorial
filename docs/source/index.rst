@@ -15,7 +15,7 @@ properties, as it contains many self-supervised algorithms:
    **Algorithms for Heterogeneous/Multiplex/Multiview Graphs**: `DMGI <https://arxiv.org/pdf/1911.06750.pdf>`_, `HeCo <https://arxiv.org/pdf/2105.09111.pdf>`_, `MCGC <https://proceedings.neurips.cc/paper/2021/file/10c66082c124f8afe3df4886f5e516e0-Paper.pdf>`_
 
    **Algorithms for Molecular Graphs**: `InfoGraph <https://openreview.net/pdf?id=r1lfF2NYvH>`_, `GraphCL <https://proceedings.nips.cc/paper/2020/file/3fe230348e9a12c13120749e3f9fa4cd-Paper.pdf>`_,
-   `AD-GCL <https://openreview.net/forum?id=ioyq7NsR1KJ>`, `JOAO <https://proceedings.mlr.press/v139/you21a.html>`_, `GraphMAE <https://arxiv.org/pdf/2205.10803.pdf>`_
+   `AD-GCL <https://openreview.net/forum?id=ioyq7NsR1KJ>`_, `JOAO <https://proceedings.mlr.press/v139/you21a.html>`_, `GraphMAE <https://arxiv.org/pdf/2205.10803.pdf>`_
 
 .. Check out the section for further information, including
 .. how to :ref:`installation` the project.
