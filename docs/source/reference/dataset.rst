@@ -1,19 +1,24 @@
-PyG-SSL Training
+PyG-SSL Datasets
 =====================
 
-Trainer
+Data
 -------------------
 
 
 
 
-Loss
+Loader
 -------------------
 
 
 
 
-Evaluation
+Augment
 -------------------
 
 
+
+
+
+Transform
+-------------------

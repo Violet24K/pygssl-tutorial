@@ -1,19 +1,13 @@
-PyG-SSL Training
+PyG-SSL Algorithms
 =====================
 
-Trainer
+Methods
 -------------------
 
 
 
 
-Loss
--------------------
-
-
-
-
-Evaluation
+Neural Network
 -------------------
 
 
