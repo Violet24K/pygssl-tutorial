@@ -2,8 +2,8 @@
 
 # -- Project information
 
-project = 'GraphSSL'
-copyright = '2023, Violet24K'
+project = 'PyG-SSL'
+copyright = '2024, Violet24K'
 author = 'Violet24K'
 
 release = '0.1'

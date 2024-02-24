@@ -1,16 +1,21 @@
-GraphSSL documentation
+PyG-SSL documentation
 ===================================
 
-**GraphSSL** is a Python library built upon `PyTorch <https://pytorch.org>`_.
+**PyG-SSL** is a Python library built upon `PyTorch <https://pytorch.org>`_ and `PyTorch Geometric <https://pytorch-geometric.readthedocs.io/en/latest/>`_.
 It integrates state-of-the-art algorithms for Self-Supervised Learning on Graphs and offers simple APIs to 
-call the algorithms from a variety of high-quality research papers. GraphSSL can be helpful for many downstream tasks, depending on the dataset
-properties, as it contains many self-supervised algorithms for different kinds of graphs:
+call the algorithms from a variety of high-quality research papers. PyGSSL can be helpful for many downstream tasks, depending on the dataset
+properties, as it contains many self-supervised algorithms:
 
-   **General/Regular Graphs**
+   **Contrastive Algorithms for General Graphs**: `DGI <https://arxiv.org/pdf/1809.10341.pdf>`_, `GCC <https://arxiv.org/pdf/2006.09963.pdf>`_, `GraphCL <https://proceedings.nips.cc/paper/2020/file/3fe230348e9a12c13120749e3f9fa4cd-Paper.pdf>`, 
+   `MVGRL <https://proceedings.mlr.press/v119/hassani20a/hassani20a.pdf>`, `GCA <https://arxiv.org/abs/2010.14945>`, `JOAO <https://proceedings.mlr.press/v139/you21a.html>`, 
+   `SUGRL <https://ojs.aaai.org/index.php/AAAI/article/view/20748>`, `MERIT <https://www.ijcai.org/proceedings/2021/0204.pdf>`, 
 
-   **Heterogeneous/Multiplex/Multiview Graphs**
+   **Non-contrastive Algorithms for General Graphs**: `BGRL <https://arxiv.org/abs/2102.06514>`, `AFGRL <https://arxiv.org/abs/2112.02472>`
 
-   **Molecular Graphs**
+   **Algorithms for Heterogeneous/Multiplex/Multiview Graphs**: `DMGI <https://arxiv.org/pdf/1911.06750.pdf>`, `HeCo <https://arxiv.org/pdf/2105.09111.pdf>`, `MCGC <https://proceedings.neurips.cc/paper/2021/file/10c66082c124f8afe3df4886f5e516e0-Paper.pdf>`
+
+   **Algorithms for Molecular Graphs**: `InfoGraph <https://openreview.net/pdf?id=r1lfF2NYvH>`, `GraphCL <https://proceedings.nips.cc/paper/2020/file/3fe230348e9a12c13120749e3f9fa4cd-Paper.pdf>`,
+   `AD-GCL <https://openreview.net/forum?id=ioyq7NsR1KJ>`, `JOAO <https://proceedings.mlr.press/v139/you21a.html>`, `GraphMAE <https://arxiv.org/pdf/2205.10803.pdf>`
 
 .. Check out the section for further information, including
 .. how to :ref:`installation` the project.
@@ -30,17 +35,18 @@ properties, as it contains many self-supervised algorithms for different kinds o
    :maxdepth: 1
    :caption: 💡 Get Started
 
-   get_started/tutorial
-   get_started/toadd
+   get_started/introduction
+   get_started/starting_example
 
 
 .. toctree::
    :maxdepth: 2
-   :caption: 🪄 Tutorial
+   :caption: Tutorial
 
    tutorials/general.rst
    tutorials/non-contrastive.rst
    tutorials/heterogeneous.rst
+   tutorials/molecure.rst
 
 
 
