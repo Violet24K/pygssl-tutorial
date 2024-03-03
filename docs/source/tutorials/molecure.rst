@@ -1,16 +1,24 @@
-Heterogeneous Algorithms
+Molecular Graph Algorithms
 =====================
 
 
-DMGI
+InfoGraph
 -------------------
 
 
-HeCo
+GraphCL
 ---------------------
 
 
-MCGC
+AD-GCL
+---------------------
+
+
+JOAO
+---------------------
+
+
+GraphMAE
 ---------------------
 
 
