@@ -43,7 +43,6 @@ properties, as it contains many self-supervised algorithms:
    :caption: 💯 Tutorial
 
    tutorials/general.rst
-   tutorials/non-contrastive.rst
    tutorials/heterogeneous.rst
    tutorials/molecure.rst
 
