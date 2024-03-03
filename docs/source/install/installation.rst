@@ -4,8 +4,6 @@ Installation
 PyG-SSL is a Python package that builds on built upon `PyTorch <https://pytorch.org>`_ and `PyTorch Geometric <https://pytorch-geometric.readthedocs.io/en/latest/>`_.
 It has been tested for Python **3.x** and PyTorch **x.x.x.** on Linux and Windows. It is recommended to use a virtual environment to install the package.
 
-To use Lumache, first install it using pip:
-
 .. code-block:: console
 
    (.venv) $ pip install pyg-ssl

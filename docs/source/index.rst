@@ -54,5 +54,7 @@ properties, as it contains many self-supervised algorithms:
    :hidden:
    :caption: 📚 Reference
 
+   reference/dataset.rst
    reference/trainer.rst
-   reference/loader.rst
+   reference/algorithms.rst
+  
