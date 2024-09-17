@@ -5,7 +5,7 @@ PyG-SSL includes state-of-the-art algorithms for Self-Supervised Learning on arb
 also include two non-contrastive learning algorithms, BGRL and AFGRL. In this page, we provide the detailed information of how to use each algorithm by PyG-SSL.
 
 
-DGI (Deep Graph Infomax)
+DGI
 --------------------------------
 
 **Deep Graph Infomax (DGI)** is a self-supervised learning method for learning node and graph-level representations. It leverages the concept of mutual information to maximize the dependency between local (node) and global (graph) representations. 
@@ -89,7 +89,7 @@ References
 
 
 
-GraphCL (Graph Contrustive Learning)
+GraphCL
 -----------------------------------------
 
 **Graph Contrastive Learning (GraphCL)** is a method in the field of machine learning that focuses on learning representations of graph-structured data by leveraging contrastive learning techniques. This approach helps in understanding and improving how models learn features from graph data.
@@ -334,7 +334,7 @@ The API of GCA is different from other algorithms in PyG-SSL bacause it requires
 
 
 
-.. class:: GRACE(encoder: torch.nn.Module, loss_function: None, num_hidden: int, num_proj_hidden: int, tau: float = 0.5):
+.. class:: GRACE(encoder: torch.nn.Module, loss_function: None, num_hidden: int, num_proj_hidden: int, tau: float = 0.5)
 
 	The GCA contrastive loss.
 
@@ -396,10 +396,7 @@ API Reference in PyG-SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. class:: SugrlGCN(in_channels: int,
-                 dim_out: int = 128,
-                 act: torch.nn = torch.nn.PReLU(),
-                 bias: bool = False):
+.. class:: SugrlGCN(in_channels: int, dim_out: int = 128, act: torch.nn = torch.nn.PReLU(), bias: bool = False)
 
 	A SUGRL encoder that generate representations given :class:`torch_geometric.data.Dataset`.
 
@@ -506,7 +503,7 @@ API Reference in PyG-SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. class:: BGRLEncoder(in_channel, hidden_channels, **kwargs):
+.. class:: BGRLEncoder(in_channel, hidden_channels, **kwargs)
 
 	A graph encoder for BGRL that generate representations given :class:`torch_geometric.data.Dataset`.
 
@@ -604,7 +601,7 @@ API Reference in PyG-SSL
 
 
 
-.. class:: AFGRL(student_encoder: torch.nn.Module, teacher_encoder: torch.nn.Module, data_augment=None, adj_ori = None, topk=8):
+.. class:: AFGRL(student_encoder: torch.nn.Module, teacher_encoder: torch.nn.Module, data_augment=None, adj_ori = None, topk=8)
 
 	The Augmentation-Free Graph Representation Learning Algorithm.
 
@@ -668,21 +665,63 @@ API Reference in PyG-SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. class:: ReGCLEncoder(in_channels, hidden_channels=512, num_layers=1, act=torch.nn.PReLU() **kwargs)
+.. class:: ReGCLEncoder(in_channels: int, out_channels: int, activation, mode: int = 1, base_model=GCNConv, k: int = 2,cutrate:float=0.2,cutway:int=1,tau:float=0.5)
 
 	A ReGCL encoder that generate representations given :class:`torch_geometric.data.Dataset`.
 
 	Parameters:
 	-----------
 
+	- **in_channels** (int, optional):
+		Number of input features of the input dataset.
+
+	- **out_channels** (int, optional):
+		Number of output features of the encoder.
+
+	- **activation** (torch.nn.Module, optional):
+		Activation function for the encoder.
+	
+	- **mode** (int, optional):
+		Mode for the encoder. Default is 1.
+
+	- **base_model** (torch.nn.Module, optional):
+		Base GNN model for the encoder. Default is GCNConv.
+
+	- **k** (int, optional):
+		Number of layers for the encoder. Default is 2.
+
+	- **cutrate** (float, optional):
+		Cut rate for the encoder. Default is 0.2.
+	
+	- **cutway** (int, optional):
+		Cut way for the encoder. Default is 1.
 
 
-.. class:: ReGCL(encoder: torch.nn.Module, hidden_channels: int, readout: Union[Callable, torch.nn.Module] = AvgReadout(), corruption: AugmentType = RandomMask(), loss_function: Optional[torch.nn.Module] = None)
 
-	The Graph Contrastive Learning Algorithm.
+.. class:: ReGCL(config, encoder: ReGCLEncoder, num_hidden: int, num_proj_hidden: int, mode: int = 1, tau: float = 0.5)
+
+	The ReGCL Algorithm.
 
 	Parameters:
 	-----------
+
+	- **config** (dict):
+		Configuration parameters for the encoder.
+
+	- **encoder** (Optional[:class:`torch.nn.Module`]): 
+  		The encoder to be trained.
+
+	- **num_hidden** (int):
+		Output dimension of the encoder.
+	
+	- **num_proj_hidden** (int):
+		Number of hidden channels for the projection head.
+
+	- **mode** (int, optional):
+		Mode for the encoder. Default is 1.
+
+	- **tau** (float):
+		Temperature parameter for the contrastive loss. Default is 0.5.
 
 
 References
