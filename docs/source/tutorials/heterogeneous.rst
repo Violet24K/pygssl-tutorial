@@ -57,24 +57,6 @@ API Reference in PyG-SSL
 
 
 
-
-.. class:: DGI(encoder: torch.nn.Module, hidden_channels: int, readout: str="avg", readout_act: Callable=torch.nn.Sigmoid())
-
-	The Deep Graph Infomax Algorithm.
-
-	Parameters:
-	-----------
-	- **encoder** (Optional[:class:`torch.nn.Module`]): 
-  		The encoder to be trained.
-
-	- **hidden_channels** (int): 
-  		Output dimension of the encoder.
-
-	- **readout** (str): 
-  		"avg" or "max", specifies how to generate global embeddings. (default: "avg")
-
-
-
 .. class:: Mp_encoder(P, hidden_dim, attn_drop)
 
 	The encoder based on meta-path. Meta-path is a sequence of node types that defines the structural information of the heterogeneous graph. The encoder is based on the GAT model.
