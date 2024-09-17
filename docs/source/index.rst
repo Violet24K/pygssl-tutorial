@@ -11,7 +11,7 @@ properties, as it contains many self-supervised algorithms:
    `SUGRL <https://ojs.aaai.org/index.php/AAAI/article/view/20748>`_, `ReGCL <https://ojs.aaai.org/index.php/AAAI/article/view/28698>`_, 
    `BGRL <https://arxiv.org/abs/2102.06514>`_, `AFGRL <https://arxiv.org/abs/2112.02472>`_
 
-   **Algorithms for Heterogeneous/Multiplex/Multiview Graphs**: `DMGI <https://arxiv.org/pdf/1911.06750.pdf>`_, `HeCo <https://arxiv.org/pdf/2105.09111.pdf>`_, `MCGC <https://proceedings.neurips.cc/paper/2021/file/10c66082c124f8afe3df4886f5e516e0-Paper.pdf>`_
+   **Algorithms for Heterogeneous/Multiplex/Multiview Graphs**: `HeCo <https://arxiv.org/pdf/2105.09111.pdf>`_
 
    **Graph-level Algorithms for Graph-level Representation Learning or Molecular Graphs**: `InfoGraph <https://openreview.net/pdf?id=r1lfF2NYvH>`_, `GraphCL <https://proceedings.nips.cc/paper/2020/file/3fe230348e9a12c13120749e3f9fa4cd-Paper.pdf>`_, `GraphMAE <https://arxiv.org/pdf/2205.10803.pdf>`_
 
