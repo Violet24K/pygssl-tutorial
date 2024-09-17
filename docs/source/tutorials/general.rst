@@ -136,7 +136,7 @@ API Reference in PyG-SSL
 		Activation function for the encoder. Default is ``torch.nn.PReLU()``.
 
 	- **kwargs** (optional): 
-		Additional arguments for :class:`pygssl.methods.DGIEncoder`.
+		Additional arguments for :class:`pygssl.methods.GraphCLEncoder`.
 
 
 
@@ -232,7 +232,7 @@ API Reference in PyG-SSL
 		Activation function for the encoder. Default is ``torch.nn.PReLU()``.
 
 	- **kwargs** (optional): 
-		Additional arguments for :class:`pygssl.methods.DGIEncoder`.
+		Additional arguments for :class:`pygssl.methods.MVGRLEncoder`.
 
 
 .. class:: MVGRLDiscriminator(hidden_channels: int = 512)
@@ -288,18 +288,182 @@ References
 GCA
 ---------------------
 
+Graph Contrastive Learning with Adaptive Augmentation (GCA) is an innovative framework designed to enhance the learning of graph representations through adaptive data augmentation techniques. GCA addresses the challenges of graph self-supervised learning by 
+introducing a dynamic augmentation strategy that adapts to the specific characteristics of the graph data.
+
+The core idea of GCA is to leverage contrastive learning principles to distinguish between similar and dissimilar node representations while employing augmentations 
+that are tailored to the graph structure. By dynamically selecting and applying augmentations during the training process, GCA effectively enhances the diversity of the learned representations and improves the model's robustness.
+
+Key Features:
+^^^^^^^^^^^^^^^^^
+- **Adaptive Augmentation**: GCA employs an adaptive augmentation mechanism that selects augmentations based on the graph's properties and the learning stage, ensuring that the most relevant transformations are applied to enhance representation learning.
+- **Contrastive Learning Framework**: By focusing on contrasting node representations from different views, GCA encourages the model to learn meaningful and discriminative features that capture the underlying graph structure.
+- **Improved Robustness**: The dynamic nature of the augmentations helps the model generalize better to various tasks, making it suitable for applications such as node classification, link prediction, and community detection.
+
+
+API Reference in PyG-SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The API of GCA is different from other algorithms in PyG-SSL bacause it requires a specific trainer. The trainer class is :class:`pygssl.methods.GCATrainer`.
+
+
+.. class:: GCA_Encoder(in_channels: int, out_channels: int, activation, base_model=GCNConv, k: int = 2, skip=False)
+
+	Encoder used for GCA.
+
+	Parameters:
+	-----------
+
+	- **in_channels** (int, optional):
+		Number of input features of the input dataset.
+
+	- **out_channels** (int, optional): 
+		Number of output channels for the encoder.
+
+	- **activation** (torch.nn.Module, optional):
+		Activation function for the encoder.
+
+	- **base_model** (torch.nn.Module, optional): 
+		Base GNN model for the encoder. Default is GCNConv.
+
+	- **k** (int, optional): 
+		Number of layers for the encoder. Default is 2.
+
+	- **skip** (bool, optional):
+		Whether to use skip connections. Default is False.
 
 
 
+.. class:: GRACE(encoder: torch.nn.Module, loss_function: None, num_hidden: int, num_proj_hidden: int, tau: float = 0.5):
 
-AD-GCL
----------------------
+	The GCA contrastive loss.
+
+	Parameters:
+	-----------
+	- **encoder** (Optional[:class:`torch.nn.Module`]): 
+  		The encoder to be trained.
+
+	- **num_hidden** (int): 
+  		Output dimension of the encoder.
+
+	- **num_proj_hidden** (int): 
+  		Number of hidden channels for the projection head.
+
+	- **tau** (float): 
+  		Temperature parameter for the contrastive loss. Default is 0.5.
+
+
+
+References
+^^^^^^^^^^^^^^^^^
+*Graph Contrastive Learning with Adaptive Augmentation*. Yanqiao Zhu, et al. Available at https://sxkdz.github.io/files/publications/WWW/GCA/GCA.pdf
 
 
 
 
 SUGRL
 ---------------------
+Simple Unsupervised Graph Representation Learning (SUGRL) is a streamlined framework designed to facilitate the learning of node representations in graph data without relying on labeled examples. As graph structures become increasingly prevalent in diverse fields such as social networks, biological networks, and recommendation systems, the demand for effective unsupervised learning techniques has surged. SUGRL addresses this need by providing a straightforward yet powerful approach to extract meaningful representations from complex graph data.
+
+Overview
+^^^^^^^^^^^^^^^^^
+The primary goal of SUGRL is to simplify the process of unsupervised graph representation learning while maintaining effectiveness and efficiency. By leveraging simple yet effective learning strategies, SUGRL enables practitioners to generate high-quality node embeddings that can be applied to a variety of downstream tasks, such as node classification, clustering, and link prediction.
+
+Key Features
+^^^^^^^^^^^^^^^^^
+- **Simplicity and Efficiency**: SUGRL is designed to be straightforward in its implementation, making it accessible for researchers and practitioners alike. Its efficiency allows for rapid experimentation and integration into existing workflows.
+
+- **Unsupervised Learning**: As an unsupervised method, SUGRL does not require labeled data, making it suitable for scenarios where labeled samples are scarce or unavailable. This characteristic is particularly beneficial in real-world applications where obtaining labels can be challenging and time-consuming.
+
+- **Effective Representation Learning**: SUGRL employs a combination of techniques to learn robust node representations. By utilizing simple training objectives, it captures the essential structural and contextual information present in the graph.
+
+- **Broad Applicability**: The embeddings generated by SUGRL can be utilized across various graph-related tasks, including but not limited to node classification, community detection, and link prediction, enhancing its utility across multiple domains.
+
+Methodology
+^^^^^^^^^^^^^^^^^
+SUGRL operates through a systematic approach that involves several key steps:
+
+1. **Graph Preprocessing**: The initial stage involves preprocessing the graph data to extract relevant features and relationships among nodes. This step may include normalization and feature engineering to enhance the quality of input data.
+
+2. **Representation Learning**: SUGRL employs unsupervised learning techniques, such as random walks or neighborhood aggregation, to generate node embeddings. These techniques allow the model to learn from the local and global structures of the graph without the need for supervision.
+
+3. **Loss Function Optimization**: A carefully designed loss function guides the optimization process, enabling the model to refine the learned representations. This process ensures that the embeddings capture meaningful similarities and differences between nodes.
+
+4. **Evaluation and Application**: Once the node representations are learned, SUGRL evaluates the quality of these embeddings through various metrics and applies them to downstream tasks, demonstrating their effectiveness and utility.
+
+
+API Reference in PyG-SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. class:: SugrlGCN(in_channels: int,
+                 dim_out: int = 128,
+                 act: torch.nn = torch.nn.PReLU(),
+                 bias: bool = False):
+
+	A SUGRL encoder that generate representations given :class:`torch_geometric.data.Dataset`.
+
+	Parameters:
+	-----------
+
+	- **in_channels** (int, optional):
+		Number of input features of the input dataset.
+
+	- **dim_out** (int, optional):
+		Number of output features of the encoder. Default is 128.
+
+	- **act** (torch.nn.Module, optional):
+		Activation function for the encoder. Default is ``torch.nn.PReLU()``.
+
+	- **bias** (bool, optional):
+		Whether to include a bias term in the linear transformation. Default is False.
+
+
+
+
+.. class:: SUGRL(encoder: torch.nn.Module, data = None, lr: float = 0.001, weight_decay: float = 0.0, n_epochs: int = 300, use_cuda: bool = True, is_sparse: bool = False, save_root: str = "", device: str = "", loss_function: Optional[torch.nn.Module] = None, config: dict = {})
+
+	The Simple Unsupervised Graph Representation Learning Algorithm.
+
+	Parameters:
+	-----------
+	- **encoder** (Optional[:class:`torch.nn.Module`]): 
+  		The encoder to be trained.
+
+	- **data** (Optional[:class:`torch_geometric.data.Dataset`]): 
+  		The dataset to be used for training.
+
+	- **lr** (float):
+		Learning rate for the optimizer. Default is 0.001.
+
+	- **weight_decay** (float):
+		Weight decay for the optimizer. Default is 0.0.
+
+	- **n_epochs** (int):
+		Number of epochs for training. Default is 300.
+	
+	- **use_cuda** (bool):
+		Whether to use CUDA for training. Default is True.
+
+	- **is_sparse** (bool):
+		Whether the graph is sparse. Default is False.
+	
+	- **save_root** (str):
+		Root directory for saving the model. Default is "".
+
+	- **device** (str):
+		Device to be used for training. Default is "".
+
+	- **loss_function** (Optional[:class:`torch.nn.Module`]):
+		The loss function to be used. Default is None.
+
+	- **config** (dict):
+		Additional configuration parameters. Default is {}.
+
+
+References
+^^^^^^^^^^^^^^^^^
+*Simple Unsupervised Graph Representation Learning*, Yujie Mo et al. Available at https://ojs.aaai.org/index.php/AAAI/article/view/20748
 
 
 
@@ -308,9 +472,219 @@ BGRL
 -------------------
 
 
+Overview
+^^^^^^^^^^^^^^^^^
+The primary aim of BGRL is to provide a scalable and robust framework for learning node embeddings that can handle large graphs efficiently. By employing a bootstrapping approach, BGRL iteratively refines node representations, allowing the model to adapt and improve as more graph data becomes available. This method not only enhances the learning process but also ensures that the representations remain relevant and high-quality over time.
+
+Key Features
+^^^^^^^^^^^^^^^^^
+- **Scalability**: BGRL is specifically designed to scale to large graphs, making it suitable for real-world applications where data sizes can be substantial. Its bootstrapping mechanism allows for efficient processing and updating of node representations without the need for complete retraining.
+
+- **Bootstrapping Technique**: The use of bootstrapping enables the model to generate additional training samples from the existing graph data. This iterative process fosters continuous learning and refinement of node embeddings, ensuring that the model adapts to changes in the graph structure over time.
+
+- **Effective Representation Learning**: BGRL employs various techniques to learn robust node representations, capturing the essential structural and relational information inherent in the graph. By iterating on learned representations, it continuously enhances their quality and relevance.
+
+- **Versatile Applications**: The embeddings produced by BGRL can be applied across a wide range of graph-related tasks, such as node classification, link prediction, and community detection, demonstrating its broad utility in various domains.
+
+Methodology
+^^^^^^^^^^^^^^^^^
+BGRL operates through a series of systematic steps:
+
+1. **Graph Preprocessing**: Initially, the graph data is preprocessed to extract relevant features and relationships among nodes. This may involve normalization, feature engineering, and constructing appropriate graph structures for learning.
+
+2. **Initial Representation Learning**: BGRL begins by generating initial node embeddings using a chosen representation learning technique. This first pass sets the foundation for subsequent bootstrapping iterations.
+
+3. **Bootstrapping Process**: In this phase, BGRL iteratively refines the node embeddings by leveraging bootstrapped samples. This process includes generating new training samples and adjusting the model based on updated representations, fostering continuous improvement.
+
+4. **Loss Function Optimization**: The model is optimized using a well-defined loss function that guides the learning process, ensuring that the embeddings accurately reflect the relationships between nodes.
+
+5. **Evaluation and Application**: After the node representations are learned and refined, BGRL evaluates their quality using various metrics and applies them to downstream tasks, demonstrating their effectiveness in practical applications.
+
+
+
+API Reference in PyG-SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. class:: BGRLEncoder(in_channel, hidden_channels, **kwargs):
+
+	A graph encoder for BGRL that generate representations given :class:`torch_geometric.data.Dataset`.
+
+	Parameters:
+	-----------
+
+	- **in_channel** (int, optional):
+		Number of input features of the input dataset.
+
+	- **hidden_channels** (int, optional): 
+		Number of hidden channels for the encoder. Default is 512.
+
+
+	- **kwargs** (optional): 
+		Additional arguments for :class:`pygssl.methods.BGRLEncoder`.
+
+
+
+
+.. class:: BGRL(student_encoder: torch.nn.Module, teacher_encoder: torch.nn.Module, data_augment = None, pred_dim=None)
+
+	The Bootstrapping Graph Representation Learning Algorithm.
+
+	Parameters:
+	-----------
+	- **student_encoder** (Optional[:class:`torch.nn.Module`]): 
+  		The student encoder to be trained.
+	
+	- **teacher_encoder** (Optional[:class:`torch.nn.Module`]):
+		The teacher encoder to be trained.
+	
+	- **data_augment** (Optional[:class:`torch.nn.Module`]):
+		The augmentation function to be used. Default is None.
+
+	- **pred_dim** (int):
+		Number of dimensions for prediction. Default is None.
+
+
+References
+^^^^^^^^^^^^^^^^^
+*Large-Scale Representation Learning on Graphs via Bootstrapping*, Shantanu Thakoor et al. Available at https://arxiv.org/abs/2102.06514
 
 
 
 AFGRL
 ---------------------
 
+Augmentation-Free Self-Supervised Learning on Graphs (AFGRL) is an innovative framework that challenges conventional approaches to graph representation learning by eliminating the reliance on data augmentation techniques. As the field of graph learning continues to evolve, the need for efficient and effective self-supervised methods has become increasingly evident. AFGRL addresses this need by introducing a novel self-supervised paradigm that focuses on intrinsic graph structures without the complexities introduced by augmentations.
+
+Introduction
+^^^^^^^^^^^^^^^^^
+The central premise of AFGRL is to leverage the rich structural information present within graphs to learn meaningful representations without the necessity for external augmentation. Traditional self-supervised learning methods often depend on various augmentation strategies, which can introduce noise and complicate the learning process. AFGRL simplifies this paradigm by utilizing inherent properties of the graph to guide representation learning, making it a streamlined and effective solution.
+
+Core Concepts
+^^^^^^^^^^^^^^^^^
+1. **Self-Supervised Learning**: AFGRL operates within a self-supervised framework, where the model learns to generate embeddings based on the graph’s structure alone. This approach allows for efficient representation learning without labeled data or additional external transformations.
+
+2. **Intrinsic Graph Structures**: By focusing on the inherent relationships between nodes and their connectivity, AFGRL captures essential features that characterize the graph. This enables the model to develop robust embeddings that reflect the true nature of the data.
+
+3. **Efficiency and Scalability**: The absence of augmentation techniques not only simplifies the training process but also enhances efficiency, allowing AFGRL to scale effectively to large graphs. This is crucial for applications involving extensive datasets where computational resources may be limited.
+
+Methodology
+^^^^^^^^^^^^^^^^^
+The AFGRL framework follows a systematic methodology:
+
+- **Graph Representation Learning**: The process begins with the model analyzing the graph structure to extract relevant features from the nodes and edges. The focus is on understanding local and global patterns without any augmentative interference.
+
+- **Self-Supervised Objectives**: AFGRL employs self-supervised learning objectives that encourage the model to learn meaningful representations based on the graph’s topology. This includes maximizing similarity between nodes that are closely connected while minimizing it for distant nodes.
+
+- **Optimization and Training**: The learning process is guided by an optimization algorithm that refines the embeddings iteratively. The absence of augmentation allows for a more straightforward training loop, reducing the complexity involved in adjusting to varying data conditions.
+
+
+
+
+API Reference in PyG-SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. class:: AFGRLEncoder(in_channel, hidden_channels, **kwargs)
+
+	A graph encoder that generate representations given :class:`torch_geometric.data.Dataset`.
+
+	Parameters:
+	-----------
+
+	- **in_channel** (int, optional):
+		Number of input features of the input dataset.
+
+	- **hidden_channels** (int, optional): 
+		Number of hidden channels for the encoder.
+
+	- **kwargs** (optional): 
+		Additional arguments for :class:`pygssl.methods.AFGRLEncoder`.
+
+
+
+
+.. class:: AFGRL(student_encoder: torch.nn.Module, teacher_encoder: torch.nn.Module, data_augment=None, adj_ori = None, topk=8):
+
+	The Augmentation-Free Graph Representation Learning Algorithm.
+
+	Parameters:
+	-----------
+	- **student_encoder** (Optional[:class:`torch.nn.Module`]): 
+  		The student encoder to be trained.
+	
+	- **teacher_encoder** (Optional[:class:`torch.nn.Module`]):
+		The teacher encoder to be trained.
+	
+	- **data_augment** (Optional[:class:`torch.nn.Module`]):
+		The augmentation function to be used. Default is None.
+
+	- **adj_ori** (Optional[:class:`torch.Tensor`]):
+		The original adjacency matrix. Default is None.
+	
+	- **topk** (int):
+		Number of topk to be used. Default is 8.
+
+
+References
+^^^^^^^^^^^^^^^^^
+*Augmentation-Free Self-Supervised Learning on Graphs*, Namkyeong Lee et al. Available at https://arxiv.org/abs/2112.02472
+
+
+
+
+ReGCL
+---------------------
+
+
+Rethinking Message Passing in Graph Contrastive Learning (ReGCL) is an innovative framework that seeks to enhance the effectiveness of graph contrastive learning by re-evaluating the message-passing mechanism traditionally used in graph neural networks. As the demand for sophisticated methods in graph representation learning increases, ReGCL provides a fresh perspective on how message passing can be optimized to improve the learning process, ultimately leading to better node representations.
+
+Introduction
+^^^^^^^^^^^^^^^^^^
+The foundation of many graph neural network (GNN) architectures lies in the message-passing paradigm, which facilitates the aggregation of information from neighboring nodes to inform the representation of each node. While effective, standard message-passing approaches may overlook critical aspects of the graph structure and relationships, particularly in the context of contrastive learning. ReGCL addresses this limitation by rethinking the message-passing process, focusing on enhancing the flow of information and its relevance to the contrastive learning task.
+
+Key Concepts
+^^^^^^^^^^^^^^^^^^
+1. **Enhanced Message Passing**: ReGCL introduces a refined message-passing mechanism that optimizes how information is exchanged among nodes. This is achieved by considering not only the immediate neighbors but also the broader structural context, leading to richer and more meaningful node embeddings.
+
+2. **Contrastive Learning Integration**: The framework effectively integrates the redefined message-passing strategy into the contrastive learning paradigm. By ensuring that messages reflect the intrinsic relationships between nodes, ReGCL promotes the learning of discriminative features that improve representation quality.
+
+3. **Scalability and Flexibility**: Designed to be scalable, ReGCL can efficiently handle large graphs while remaining flexible enough to be adapted to various applications. This is crucial in real-world scenarios where graph data can be extensive and complex.
+
+Methodology
+^^^^^^^^^^^^^^^^^^
+ReGCL follows a systematic approach to improve graph contrastive learning:
+
+- **Message-Passing Redefinition**: The first step involves redefining the message-passing process to enhance the flow of information between nodes. This includes incorporating mechanisms that prioritize relevant structural features.
+
+- **Self-Supervised Objectives**: ReGCL employs self-supervised learning objectives that guide the model in distinguishing between similar and dissimilar node representations. This is achieved through contrastive losses that leverage the enhanced messages.
+
+- **Training and Optimization**: The training process involves optimizing the model using efficient algorithms that capitalize on the improved message-passing framework. This leads to refined embeddings that better capture the underlying graph structure.
+
+
+
+
+API Reference in PyG-SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. class:: ReGCLEncoder(in_channels, hidden_channels=512, num_layers=1, act=torch.nn.PReLU() **kwargs)
+
+	A ReGCL encoder that generate representations given :class:`torch_geometric.data.Dataset`.
+
+	Parameters:
+	-----------
+
+
+
+.. class:: ReGCL(encoder: torch.nn.Module, hidden_channels: int, readout: Union[Callable, torch.nn.Module] = AvgReadout(), corruption: AugmentType = RandomMask(), loss_function: Optional[torch.nn.Module] = None)
+
+	The Graph Contrastive Learning Algorithm.
+
+	Parameters:
+	-----------
+
+
+References
+^^^^^^^^^^^^^^^^^
+*ReGCL: Rethinking Message Passing in Graph Contrastive Learning*, Cheng Ji et al. Available at https://ojs.aaai.org/index.php/AAAI/article/view/28698
