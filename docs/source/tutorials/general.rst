@@ -89,18 +89,206 @@ References
 
 
 
-GraphCL
----------------------
+GraphCL (Graph Contrustive Learning)
+-----------------------------------------
+
+**Graph Contrastive Learning (GraphCL)** is a method in the field of machine learning that focuses on learning representations of graph-structured data by leveraging contrastive learning techniques. This approach helps in understanding and improving how models learn features from graph data.
+
+Key Concepts
+^^^^^^^^^^^^^^^^
+1. **Augmentations**: Techniques applied to the original graph to generate variations. These can include node dropout, edge perturbation, and subgraph sampling. The idea is to create different views of the same graph to learn robust representations.
+
+2. **Graph Representations**: The embeddings or features learned from graphs that capture their structural and semantic information. These representations are used for various downstream tasks such as node classification, link prediction, and graph classification.
+
+3. **Loss Functions**: Functions used to measure the difference between the predicted and actual similarities. Common loss functions in GraphCL include the InfoNCE loss and other contrastive losses tailored for graph data.
+
+
+Learning Objectivs
+^^^^^^^^^^^^^^^^^^^^^^^^
+- **Positive Pairs**: Constructed by applying different augmentations to the same original graph. For example, if you have a graph `G`, applying node dropout to `G` to create `G'` and edge perturbation to `G` to create `G''` would result in positive pairs (`G'`, `G''`) because they represent different views of the same underlying graph structure.
+
+- **Negative Pairs**: Constructed by contrasting graphs from different samples. For instance, if you have two different graphs `G1` and `G2`, they form a negative pair (`G1`, `G2`) because they represent different graph structures. The model is trained to ensure that the similarity between these negative pairs is minimized compared to the positive pairs.
+
+
+
+
+API Reference in PyG-SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. class:: GraphCLEncoder(in_channels, hidden_channels=512, num_layers=1, act=torch.nn.PReLU() **kwargs)
+
+	A graphcl encoder that generate representations given :class:`torch_geometric.data.Dataset`.
+
+	Parameters:
+	-----------
+
+	- **in_channels** (int, optional):
+		Number of input features of the input dataset.
+
+	- **hidden_channels** (int, optional): 
+		Number of hidden channels for the encoder. Default is 512.
+
+	- **num_layers** (int, optional): 
+		Number of layers for the encoder. Default is 1.
+
+	- **act** (torch.nn.Module, optional): 
+		Activation function for the encoder. Default is ``torch.nn.PReLU()``.
+
+	- **kwargs** (optional): 
+		Additional arguments for :class:`pygssl.methods.DGIEncoder`.
+
+
+
+
+.. class:: GraphCL(encoder: torch.nn.Module, hidden_channels: int, readout: Union[Callable, torch.nn.Module] = AvgReadout(), corruption: AugmentType = RandomMask(), loss_function: Optional[torch.nn.Module] = None)
+
+	The Graph Contrastive Learning Algorithm.
+
+	Parameters:
+	-----------
+	- **encoder** (Optional[:class:`torch.nn.Module`]): 
+  		The encoder to be trained.
+
+	- **hidden_channels** (int): 
+  		Output dimension of the encoder.
+
+	- **readout** (str): 
+  		"avg" or "max", specifies how to generate global embeddings. (default: "avg")
+
+	- **corruption** (str): 
+  		Augmentation type to be used. (default: "RandomMask")
+	
+	- **loss_function** (Optional[:class:`torch.nn.Module`]):
+		The loss function to be used. (default: None)
+
+
+
+References
+^^^^^^^^^^^^^^^^^
+*Graph Contrastive Learning with Augmentations*. Yuning You, et al. Available at https://arxiv.org/abs/2010.13902
+
 
 
 
 MVGRL
 ---------------------
 
+MVGRL, or Contrastive Multi-View Representation Learning on Graphs, is a pioneering framework designed to leverage the inherent multi-view characteristics of graph data. It aims to enhance the quality of node representations by contrasting different views derived from the same graph structure. 
+
+The fundamental premise of MVGRL is that each node can be represented in multiple ways, influenced by its neighborhood, structural attributes, and other contextual information. By employing a contrastive learning approach, MVGRL encourages the model to distinguish between similar and dissimilar node representations across these diverse views. 
+
+Key Features:
+^^^^^^^^^^^^^^^^^
+- **Multi-View Learning**: MVGRL captures the rich structural information of graphs by integrating multiple perspectives, allowing for a more comprehensive understanding of node relationships.
+- **Contrastive Objective**: The use of a contrastive loss function enables the model to focus on distinguishing representations of similar nodes while pushing apart those that are dissimilar.
+- **Scalability**: MVGRL is designed to scale effectively to large graphs, making it applicable in various domains, including social networks, biological networks, and recommendation systems.
+
+
+
+API Reference in PyG-SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. class:: MVGRLBaseEncoder(in_channels: int, hidden_channels: int = 512, act: torch.nn = torch.nn.PReLU(), bias: bool = True)
+
+	This class serves as the foundational encoder for the MVGRL framework. It is responsible for embedding nodes into a latent space, processing input features, and generating initial representations. 
+	It likely includes methods for handling various view transformations and learning representations based on the graph structure.
+
+	Parameters:
+	-----------
+
+	- **in_channels** (int, optional):
+		Number of input features of the input dataset.
+
+	- **hidden_channels** (int, optional): 
+		Number of hidden channels for the encoder. Default is 512.
+
+	- **num_layers** (int, optional): 
+		Number of layers for the encoder. Default is 1.
+
+	- bias (bool, optional): 
+		Whether to include a bias term in the linear transformation. Default is True.
+
+
+
+.. class:: MVGRLEncoder(in_channels: int, hidden_channels: int = 512, act: torch.nn = torch.nn.PReLU(), bias: bool = True)
+
+	This class extends the functionality of :class:`MVGRLBaseEncoder`` by incorporating two instances of the base encoder. Each encoder processes different views of the graph simultaneously, capturing diverse information 
+	about the nodes. The outputs from these encoders are then combined or contrasted to enhance representation learning through the multi-view paradigm.
+
+	Parameters:
+	-----------
+
+	- **in_channels** (int, optional):
+		Number of input features of the input dataset.
+
+	- **hidden_channels** (int, optional): 
+		Number of hidden channels for the encoder. Default is 512.
+
+	- **num_layers** (int, optional): 
+		Number of layers for the encoder. Default is 1.
+
+	- **act** (torch.nn.Module, optional): 
+		Activation function for the encoder. Default is ``torch.nn.PReLU()``.
+
+	- **kwargs** (optional): 
+		Additional arguments for :class:`pygssl.methods.DGIEncoder`.
+
+
+.. class:: MVGRLDiscriminator(hidden_channels: int = 512)
+
+	The discriminator class plays a crucial role in the contrastive learning process. It evaluates the similarity between the representations generated by the :class:`MVGRLEncoder`` for different views. 
+	By applying a contrastive loss function, it helps to distinguish between positive pairs (representations of the same node from different views) and negative pairs (representations of different nodes), guiding the overall training process.
+
+	Parameters:
+	-----------
+
+	- **hidden_channels** (int, optional): 
+		Number of hidden channels for the encoder. Default is 512.
+
+
+
+
+.. class:: MVGRL(encoder: torch.nn.Module, hidden_channels: int, readout: str="avg", readout_act: Callable=torch.nn.Sigmoid(), diff: AugmentType = ComputePPR(), is_sparse = False, sample_size: int = 1000)
+
+	This is the main class that orchestrates the entire MVGRL framework. It integrates the encoder and discriminator components, manages the training loop, and optimizes the model parameters. 
+	This class is responsible for feeding data through the encoder, computing the contrastive loss using the discriminator, and updating the model based on the loss values.
+
+	Parameters:
+	-----------
+	- **encoder** (Optional[:class:`torch.nn.Module`]): 
+  		The encoder to be trained.
+
+	- **hidden_channels** (int): 
+  		Output dimension of the encoder.
+
+	- **readout** (str): 
+  		"avg" or "max", specifies how to generate global embeddings. (default: "avg")
+
+	- **readout_act** (torch.nn.Module):
+		Activation function for readout.
+	
+	- **diff** (str): 
+  		Augmentation type to be used. (default: "ComputePPR")
+	
+	- **is_sparse** (bool): 
+  		Whether the graph is sparse or not. (default: False)
+
+	- **sample_size** (int): 
+  		Number of samples to be used. (default: 1000)
+
+
+
+References
+^^^^^^^^^^^^^^^^^
+**Contrastive Multi-View Representation Learning on Graphs**, Kaveh Hassani et al. Available at https://arxiv.org/abs/2006.05582.
+
 
 
 GCA
 ---------------------
+
+
 
 
 
