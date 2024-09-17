@@ -3,8 +3,8 @@
 # -- Project information
 
 project = 'PyG-SSL'
-copyright = '2024, Violet24K'
-author = 'Violet24K'
+copyright = '2024, Anonymous submission to LoG 2024'
+author = 'Anonymous'
 
 release = '0.1'
 version = '0.1.0'
@@ -33,3 +33,8 @@ html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
+
+
+html_context = {
+    "display_github": False,  # Set to False to remove 'Edit on GitHub' links
+}

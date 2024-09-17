@@ -1,5 +1,5 @@
 Starting Example
-============
+=======================
 
 We introduce the fundamental concepts of PyG-SSL through self-contained examples. In this example, we will show how to obtain
 and evaluate the embeddings of TUDataset using the InfoGraph self-supervised learning.

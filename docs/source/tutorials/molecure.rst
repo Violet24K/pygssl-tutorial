@@ -1,5 +1,5 @@
 Molecular Graph Algorithms
-=====================
+===================================
 
 
 InfoGraph
