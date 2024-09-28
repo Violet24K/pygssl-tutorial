@@ -44,9 +44,3 @@ If you find PyG-SSL useful in your research, please consider citing the followin
      journal={arXiv preprint arXiv: xxxx.xxxxx},
      year={2024}
    }
-
-
-
-PyG-SSL not only includes the algorithms themselves, but also the benchmark datasets and evaluation metrics. The integrated datasets are:
-
-**ToDo**
