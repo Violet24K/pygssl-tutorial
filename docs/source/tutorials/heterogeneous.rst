@@ -8,11 +8,11 @@ HeCo
 HeCo (Self-supervised Heterogeneous Graph Neural Network with Co-contrastive Learning) is an innovative framework designed to effectively learn representations from heterogeneous graphs by leveraging self-supervised learning techniques. In heterogeneous graphs, nodes and edges can belong to multiple types, making it crucial to capture the intricate relationships and interactions between diverse entities. HeCo addresses this challenge by introducing a co-contrastive learning approach that enhances the learning process, allowing for the extraction of rich, informative embeddings.
 
 Introduction
-------------
+^^^^^^^^^^^^^^^^^
 The core idea of HeCo is to utilize co-contrastive learning to enable a graph neural network to learn robust representations from both the structural and attribute information present in heterogeneous graphs. Traditional methods often struggle to effectively represent the complexity of such graphs due to the diverse nature of their components. HeCo overcomes this limitation by applying a dual contrastive loss mechanism that simultaneously contrasts node representations across different views and types, thereby promoting meaningful embeddings that reflect the underlying graph structure.
 
 Key Concepts
--------------
+^^^^^^^^^^^^^^^^^
 1. **Heterogeneous Graph Representation**: HeCo is specifically designed for heterogeneous graphs, recognizing the diversity in node and edge types. This allows the framework to capture the unique relationships and features associated with different entities within the graph.
 
 2. **Co-contrastive Learning**: The framework introduces a co-contrastive learning approach, where representations are learned by contrasting positive pairs (similar entities) and negative pairs (dissimilar entities) across multiple views. This dual mechanism enhances the robustness of the learned embeddings.
@@ -20,7 +20,7 @@ Key Concepts
 3. **Self-supervised Framework**: Operating within a self-supervised learning paradigm, HeCo eliminates the need for labeled data, making it applicable in scenarios where acquiring labels is difficult or costly. This enhances its versatility across various applications.
 
 Methodology
------------
+^^^^^^^^^^^^^^^^^
 HeCo's methodology involves several key steps:
 
 - **Graph Representation Learning**: The process begins with the generation of diverse views of the heterogeneous graph, allowing for the exploration of different aspects of the data.
